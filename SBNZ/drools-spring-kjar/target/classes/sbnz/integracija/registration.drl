@@ -1,0 +1,21 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Registration not expensive - car price under 10000"
+    when
+        $c: Car(getPrice() < 10000, getRegPrice() < getPrice()*0.05, q.getRegNotExpensive() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Registration not expensive - car price over 10000"
+    when
+        $c: Car(getPrice() >= 10000, getRegPrice() < getPrice()*0.1, q.getRegNotExpensive() == true)
+    then
+        $c.setScore(15);
+end

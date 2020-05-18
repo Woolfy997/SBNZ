@@ -1,0 +1,14 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Prefered car make"
+    when
+        $c: Car(getMake() == q.getMake())
+    then
+        $c.setScore(15);
+end

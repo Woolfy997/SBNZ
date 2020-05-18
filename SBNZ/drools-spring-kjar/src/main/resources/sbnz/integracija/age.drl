@@ -1,0 +1,21 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Car within age range"
+    when
+        $c: Car(2020 - getYear() <= q.getAge())
+    then
+        $c.setScore(40);
+end
+
+rule "Car close to age range"
+    when
+        $c: Car(q.getAge() < 2020 - getYear(), 2020 - getYear() <= q.getAge()+2)
+    then
+        $c.setScore(20);
+end

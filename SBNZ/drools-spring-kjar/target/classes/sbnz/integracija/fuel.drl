@@ -1,0 +1,36 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+import ftn.siit.sbnz.SBNZ.model.Car.Fuel
+
+global Query q
+
+rule "Low fuel consumption - diesel"
+    when
+        $c: Car(getFuelConsumption() <= 8, getFuel() == Fuel.DIESEL, q.getLowFuelConsumption() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Low fuel consumption - gas"
+    when
+        $c: Car(getFuelConsumption() <= 10, getFuel() == Fuel.GAS, q.getLowFuelConsumption() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Low fuel consumption - lpg"
+    when
+        $c: Car(getFuelConsumption() <= 13, getFuel() == Fuel.LPG, q.getLowFuelConsumption() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Low fuel consumption - hybrid"
+    when
+        $c: Car(getFuelConsumption() <= 3, getFuel() == Fuel.HYBRID, q.getLowFuelConsumption() == true)
+    then
+        $c.setScore(15);
+end

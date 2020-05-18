@@ -1,0 +1,30 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Query.Purpose
+import ftn.siit.sbnz.SBNZ.model.Car
+import ftn.siit.sbnz.SBNZ.model.Car.Type
+
+global Query q
+
+rule "Sport cars"
+    when
+        $c: Car((getType() == Type.COUPE || getType() == Type.CONVERTIBLE), q.getPurpose() == Purpose.SPORT)
+    then
+        $c.setScore(15);
+end
+
+rule "Off-road cars"
+    when
+        $c: Car((getType() == Type.SUV || getType() == Type.PICKUP), q.getPurpose() == Purpose.OFFROAD)
+    then
+        $c.setScore(15);
+end
+
+rule "Transport cars"
+    when
+        $c: Car((getType() == Type.PICKUP || getType() == Type.STATIONWAGON || getType() == Type.SUV), q.getPurpose() == Purpose.TRANSPORT)
+    then
+        $c.setScore(15);
+end

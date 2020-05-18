@@ -1,0 +1,15 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+import ftn.siit.sbnz.SBNZ.model.Car.Type
+
+global Query q
+
+rule "Smaller car for inexperienced drivers"
+    when
+        $c: Car((getType() == Type.CONVERTIBLE || getType() == Type.COUPE || getType() == Type.HATCHBACK), q.getExperience() < 4)
+    then
+        $c.setScore(25);
+end

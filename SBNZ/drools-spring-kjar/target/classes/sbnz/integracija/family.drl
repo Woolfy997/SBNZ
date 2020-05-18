@@ -1,0 +1,22 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Query.Purpose
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Enough seats for the family"
+    when
+        $c: Car(getSeats() >= q.getFamilySize(), q.getPurpose() == Purpose.EVERYDAY)
+    then
+        $c.setScore(25);
+end
+
+rule "Four or more doors for a bigger family"
+    when
+        $c: Car(getDoors() > 2, q.getPurpose() == Purpose.EVERYDAY, q.getFamilySize() > 2)
+    then
+        $c.setScore(15);
+end

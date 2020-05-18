@@ -1,0 +1,14 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Prefered country of origin"
+    when
+        $c: Car(getCountry() == q.getCountry())
+    then
+        $c.setScore(10);
+end

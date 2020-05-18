@@ -1,0 +1,28 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Low mileage current year"
+    when
+        $c: Car(getYear() == 2020, getKm() < 10000, q.getLowKm() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Low mileage"
+    when
+        $c: Car(getYear() != 2020, getKm() < 200000, getKm() / (2020 - getYear()) < 10000, q.getLowKm() == true)
+    then
+        $c.setScore(15);
+end
+
+rule "Very high mileage"
+    when
+        $c: Car(getKm() > 500000, q.getLowKm() == true)
+    then
+        $c.setScore(-15);
+end
