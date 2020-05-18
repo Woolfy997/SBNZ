@@ -247,8 +247,8 @@ class SbnzApplicationTests {
 		query.setLowFuelConsumption(false);
 		query.setAge(10);
 		query.setLuxury(true);
-		query.setCountry(Car.Country.GERMANY);
-		query.setMake("Volkswagen");
+		query.setCountry(Car.Country.UK);
+		query.setMake("LAND ROVER");
 		query.setGear(Query.Gear.AUTOMATIC);
 		query.setEnvironment(false);
 		query.setLowKm(true);

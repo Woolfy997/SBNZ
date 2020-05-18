@@ -29,7 +29,13 @@ public class Service {
         kieSession.fireAllRules();
         kieSession.dispose();
         Collections.sort(cars, new Sorter());
-        for (int i = 0; i < 10; i++) {
+        System.out.println("Top 3");
+        for (int i = 0; i < 3; i++) {
+            System.out.println(cars.get(i));
+        }
+        System.out.println("");
+        System.out.println("Rest");
+        for (int i = 3; i < cars.size(); i++) {
             System.out.println(cars.get(i));
         }
     }
