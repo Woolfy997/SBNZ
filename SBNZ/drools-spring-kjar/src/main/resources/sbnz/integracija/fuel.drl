@@ -32,6 +32,7 @@ rule "Low fuel consumption - lpg"
 end
 
 rule "Low fuel consumption - hybrid"
+    salience 10
     when
         $c: Car(getFuelConsumption() <= 3, getFuel() == Fuel.HYBRID, q.getLowFuelConsumption() == true)
     then

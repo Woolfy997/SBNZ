@@ -3,7 +3,7 @@ package ftn.siit.sbnz.SBNZ;
 import ftn.siit.sbnz.SBNZ.model.Car;
 import ftn.siit.sbnz.SBNZ.model.Filter;
 import ftn.siit.sbnz.SBNZ.model.Query;
-import ftn.siit.sbnz.SBNZ.services.Service;
+import ftn.siit.sbnz.SBNZ.services.MainService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 class SbnzApplicationTests {
 
 	@Autowired
-	private Service service;
-
+	private MainService mainService;
+/*
 	@Test
 	void mainTest() {
 		Car car1 = new Car();
@@ -260,7 +260,8 @@ class SbnzApplicationTests {
 		filter.setType(Car.Type.SUV);
 		filter.setGear(Car.Gear.AUTOMATIC);
 
-		service.test(cars, query, filter);
-	}
+		mainService.filter(filter);
 
+	}
+*/
 }

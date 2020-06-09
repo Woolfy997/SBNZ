@@ -239,7 +239,7 @@ public class Car {
     public String toString() {
         return id + " " + year + " " + make + " " + model + " " + price + " " + ": " + score;
     }
-/*
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -251,6 +251,6 @@ public class Car {
         if (!Objects.equals(gear, car.gear)) { return false; }
         return true;
     }
-*/
+
 
 }

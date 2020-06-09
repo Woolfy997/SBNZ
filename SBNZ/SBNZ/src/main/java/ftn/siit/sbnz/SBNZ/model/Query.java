@@ -1,5 +1,7 @@
 package ftn.siit.sbnz.SBNZ.model;
 
+import ftn.siit.sbnz.SBNZ.web.dto.QueryDTO;
+
 public class Query {
 
     public enum Purpose {
@@ -43,6 +45,34 @@ public class Query {
         this.gear = gear;
         this.environment = environment;
         this.lowKm = lowKm;
+    }
+
+    public Query(QueryDTO queryDTO) {
+        if (queryDTO.getBudget() == null) {
+            queryDTO.setBudget(0);
+        }
+        if (queryDTO.getFamilySize() == null) {
+            queryDTO.setFamilySize(0);
+        }
+        if (queryDTO.getExperience() == null) {
+            queryDTO.setExperience(0);
+        }
+        if (queryDTO.getAge() == null) {
+            queryDTO.setAge(0);
+        }
+        this.budget = queryDTO.getBudget();
+        this.familySize = queryDTO.getFamilySize();
+        this.experience = queryDTO.getExperience();
+        this.purpose = Purpose.valueOf(queryDTO.getPurpose());
+        this.regNotExpensive = queryDTO.getRegNotExpensive();
+        this.lowFuelConsumption = queryDTO.getLowFuelConsumption();
+        this.age = queryDTO.getAge();
+        this.luxury = queryDTO.getLuxury();
+        this.country = Car.Country.valueOf(queryDTO.getCountry());
+        this.make = queryDTO.getMake();
+        this.gear = Gear.valueOf(queryDTO.getGear());
+        this.environment = queryDTO.getEnvironment();
+        this.lowKm = queryDTO.getLowKm();
     }
 
     public Integer getBudget() {
