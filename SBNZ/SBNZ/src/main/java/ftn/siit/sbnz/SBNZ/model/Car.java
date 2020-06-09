@@ -1,5 +1,9 @@
 package ftn.siit.sbnz.SBNZ.model;
 
+import org.kie.api.definition.type.Position;
+
+import java.util.Objects;
+
 public class Car {
 
     public enum Country {
@@ -17,14 +21,16 @@ public class Car {
     public enum Gear {
         MANUAL, AUTOMATIC
     }
-
+    @Position(0)
     private Integer id;
     private String make;
     private String model;
     private Country country;
+    @Position(1)
     private Fuel fuel;
     private Integer year;
     private Double price;
+    @Position(2)
     private Type type;
     private Boolean luxury;
     private Integer doors;
@@ -36,6 +42,7 @@ public class Car {
     private Double rating;
     private Double fuelConsumption;
     private Integer regPrice;
+    @Position(3)
     private Gear gear;
     private Integer score;
 
@@ -232,4 +239,18 @@ public class Car {
     public String toString() {
         return id + " " + year + " " + make + " " + model + " " + price + " " + ": " + score;
     }
+/*
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+
+        Car car = (Car) o;
+        if (!Objects.equals(fuel, car.fuel)) { return false; }
+        if (!Objects.equals(type, car.type)) { return false; }
+        if (!Objects.equals(gear, car.gear)) { return false; }
+        return true;
+    }
+*/
+
 }

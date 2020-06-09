@@ -8,6 +8,7 @@ import ftn.siit.sbnz.SBNZ.model.Car.Fuel
 global Query q
 
 rule "Environment friendly car prefered - electric"
+    salience 8
     when
         $c: Car(getFuel() == Fuel.ELECTRIC, q.getEnvironment() == true)
     then
@@ -15,6 +16,7 @@ rule "Environment friendly car prefered - electric"
 end
 
 rule "Environment friendly car prefered - hybrid"
+    salience 8
     when
         $c: Car(getFuel() == Fuel.HYBRID, q.getEnvironment() == true)
     then
@@ -22,6 +24,7 @@ rule "Environment friendly car prefered - hybrid"
 end
 
 rule "Environment friendly car prefered - lpg"
+    salience 8
     when
         $c: Car(getFuel() == Fuel.LPG, q.getEnvironment() == true)
     then

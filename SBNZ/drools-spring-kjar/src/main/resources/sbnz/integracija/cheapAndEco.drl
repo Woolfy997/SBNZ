@@ -1,0 +1,31 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "low cost and eco friendly - bonus electric"
+    salience 7
+    when
+        $c: Car(getScore() == 60)
+    then
+        $c.setScore(10);
+end
+
+rule "low cost and eco friendly - bonus hybrid"
+    salience 7
+    when
+        $c: Car(getScore() == 55)
+    then
+        $c.setScore(10);
+end
+
+rule "low cost and eco friendly - bonus lpg"
+    salience 7
+    when
+        $c: Car(getScore() == 50)
+    then
+        $c.setScore(10);
+end

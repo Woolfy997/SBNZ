@@ -8,6 +8,7 @@ import ftn.siit.sbnz.SBNZ.model.Car.Fuel
 global Query q
 
 rule "Low fuel consumption - diesel"
+    salience 10
     when
         $c: Car(getFuelConsumption() <= 8, getFuel() == Fuel.DIESEL, q.getLowFuelConsumption() == true)
     then
@@ -15,6 +16,7 @@ rule "Low fuel consumption - diesel"
 end
 
 rule "Low fuel consumption - gas"
+    salience 10
     when
         $c: Car(getFuelConsumption() <= 10, getFuel() == Fuel.GAS, q.getLowFuelConsumption() == true)
     then
@@ -22,6 +24,7 @@ rule "Low fuel consumption - gas"
 end
 
 rule "Low fuel consumption - lpg"
+    salience 10
     when
         $c: Car(getFuelConsumption() <= 13, getFuel() == Fuel.LPG, q.getLowFuelConsumption() == true)
     then

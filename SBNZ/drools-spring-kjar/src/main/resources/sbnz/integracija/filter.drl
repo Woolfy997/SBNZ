@@ -1,0 +1,36 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Car
+import ftn.siit.sbnz.SBNZ.model.Car.*
+import ftn.siit.sbnz.SBNZ.model.Filter
+import java.util.ArrayList
+
+global ArrayList<Car> cars
+global Filter filter
+
+query hasFuel(Integer id2, Car.Fuel fuel2)
+    Car(id2, fuel2;)
+end
+
+query hasType(Integer id2, Car.Type type2)
+    Car(id2, getFuel(), type2;)
+end
+
+query hasGear(Integer id2, Car.Gear gear2)
+    Car(id2, getFuel(), getType(), gear2;)
+end
+
+query hasCar(Integer id)
+    hasFuel(id, filter.getFuel();)
+    hasType(id, filter.getType();)
+    hasGear(id, filter.getGear();)
+end
+
+rule "filter cars"
+    when
+        $c: Car($id: getId());
+        hasCar($id;)
+    then
+        cars.add($c);
+end

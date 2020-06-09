@@ -1,6 +1,7 @@
 package ftn.siit.sbnz.SBNZ.services;
 
 import ftn.siit.sbnz.SBNZ.model.Car;
+import ftn.siit.sbnz.SBNZ.model.Filter;
 import ftn.siit.sbnz.SBNZ.model.Query;
 import ftn.siit.sbnz.SBNZ.util.Sorter;
 import org.kie.api.runtime.KieContainer;
@@ -13,16 +14,14 @@ import java.util.Collections;
 @org.springframework.stereotype.Service
 public class Service {
 
-    private KieContainer kieContainer;
-
     @Autowired
-    public Service(KieContainer kieContainer) {
-        this.kieContainer = kieContainer;
-    }
+    public SessionService sessionService;
 
-    public void test(ArrayList<Car> cars, Query query) {
-        KieSession kieSession =  kieContainer.newKieSession();
+    public void test(ArrayList<Car> cars, Query query, Filter filter) {
+        KieSession kieSession =  sessionService.getKieSession();
         kieSession.setGlobal("q", query);
+        kieSession.setGlobal("cars", new ArrayList<Car>());
+        kieSession.setGlobal("filter", filter);
         for (Car car: cars) {
             kieSession.insert(car);
         }
@@ -38,5 +37,6 @@ public class Service {
         for (int i = 3; i < cars.size(); i++) {
             System.out.println(cars.get(i));
         }
+        System.out.println(kieSession.getGlobal("cars"));
     }
 }

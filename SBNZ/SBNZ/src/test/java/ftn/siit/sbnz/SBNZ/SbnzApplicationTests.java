@@ -1,6 +1,7 @@
 package ftn.siit.sbnz.SBNZ;
 
 import ftn.siit.sbnz.SBNZ.model.Car;
+import ftn.siit.sbnz.SBNZ.model.Filter;
 import ftn.siit.sbnz.SBNZ.model.Query;
 import ftn.siit.sbnz.SBNZ.services.Service;
 import org.junit.jupiter.api.Test;
@@ -238,6 +239,7 @@ class SbnzApplicationTests {
 		cars.add(car8);
 		cars.add(car9);
 		cars.add(car10);
+
 		Query query = new Query();
 		query.setBudget(100000);
 		query.setFamilySize(4);
@@ -253,7 +255,12 @@ class SbnzApplicationTests {
 		query.setEnvironment(false);
 		query.setLowKm(true);
 
-		service.test(cars, query);
+		Filter filter = new Filter();
+		filter.setFuel(Car.Fuel.DIESEL);
+		filter.setType(Car.Type.SUV);
+		filter.setGear(Car.Gear.AUTOMATIC);
+
+		service.test(cars, query, filter);
 	}
 
 }

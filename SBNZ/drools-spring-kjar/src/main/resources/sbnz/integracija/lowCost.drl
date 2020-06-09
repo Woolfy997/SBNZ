@@ -1,0 +1,15 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import ftn.siit.sbnz.SBNZ.model.Query
+import ftn.siit.sbnz.SBNZ.model.Car
+
+global Query q
+
+rule "Low fuel and cheap registration - low cost bonus"
+    salience 9
+    when
+        $c: Car(getScore() == 30)
+    then
+        $c.setScore(10);
+end
