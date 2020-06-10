@@ -1,5 +1,0 @@
-rule "nothing"
-when
-then
-    System.out.println("this rule does nothing");
-end

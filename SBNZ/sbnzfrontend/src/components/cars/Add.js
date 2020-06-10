@@ -17,7 +17,7 @@ const Add = (props) => {
       name: name
     };
     Axios.post(
-      "http://localhost:8080/addRule",
+      "http://localhost:8080/addrule",
       rule, {headers: {"X-Auth-Token": props.accessToken}}
     ).then((response) => console.log(response.data));
   };

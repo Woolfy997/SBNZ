@@ -50,7 +50,7 @@ public class QueryController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/addRule")
+    @PostMapping("/addrule")
     public ResponseEntity<String> addRule(@RequestBody RuleDTO ruleDTO) {
         mainService.addRule(ruleDTO);
         return new ResponseEntity<>("Rule added", HttpStatus.OK);
