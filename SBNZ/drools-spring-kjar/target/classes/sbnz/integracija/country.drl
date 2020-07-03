@@ -7,8 +7,10 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Prefered country of origin"
+    agenda-group "recommendation"
+    salience 95
     when
-        $c: Car(getCountry() == q.getCountry())
+        $c: Car(getScore().getCountry() == 0, getCountry() == q.getCountry())
     then
-        $c.setScore(10);
+        modify($c){getScore().setCountry(10)}
 end

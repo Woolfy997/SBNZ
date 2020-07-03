@@ -30,7 +30,7 @@ class SbnzApplicationTests {
 		query.setLuxury(true);
 		query.setCountry(Car.Country.UK);
 		query.setMake("LAND ROVER");
-		query.setGear(Query.Gear.AUTOMATIC);
+		query.setGear(Car.Gear.AUTOMATIC);
 		query.setEnvironment(false);
 		query.setLowKm(true);
 

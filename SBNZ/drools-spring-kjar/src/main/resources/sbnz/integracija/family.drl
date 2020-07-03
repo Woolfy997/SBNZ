@@ -8,15 +8,19 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Enough seats for the family"
+    agenda-group "recommendation"
+    salience 93
     when
-        $c: Car(getSeats() >= q.getFamilySize(), q.getPurpose() == Purpose.EVERYDAY)
+        $c: Car(getScore().getFamilySeats() == 0, getSeats() >= q.getFamilySize(), q.getPurpose() == Purpose.EVERYDAY)
     then
-        $c.setScore(25);
+        modify($c){getScore().setFamilySeats(25)}
 end
 
 rule "Four or more doors for a bigger family"
+    agenda-group "recommendation"
+    salience 92
     when
-        $c: Car(getDoors() > 2, q.getPurpose() == Purpose.EVERYDAY, q.getFamilySize() > 2)
+        $c: Car(getScore().getFamilyDoors() == 0, getDoors() > 2, q.getPurpose() == Purpose.EVERYDAY, q.getFamilySize() > 2)
     then
-        $c.setScore(15);
+        modify($c){getScore().setFamilyDoors(15)}
 end

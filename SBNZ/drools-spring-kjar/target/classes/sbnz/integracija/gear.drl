@@ -2,22 +2,16 @@ package sbnz.integracija;
 dialect  "mvel"
 
 import ftn.siit.sbnz.SBNZ.model.Query
-import ftn.siit.sbnz.SBNZ.model.Query.Gear
 import ftn.siit.sbnz.SBNZ.model.Car
 import ftn.siit.sbnz.SBNZ.model.Car.Gear
 
 global Query q
 
-rule "Manual gearbox prefered"
+rule "Prefered gearbox"
+    agenda-group "recommendation"
+    salience 91
     when
-        $c: Car(getGear() == Car.Gear.MANUAL, q.getGear() == Query.Gear.MANUAL)
+        $c: Car(getScore().getGear() == 0, getGear() == q.getGear())
     then
-        $c.setScore(10);
-end
-
-rule "Automatic gearbox prefered"
-    when
-        $c: Car(getGear() == Car.Gear.AUTOMATIC, q.getGear() == Query.Gear.AUTOMATIC)
-    then
-        $c.setScore(10);
+        modify($c){getScore().setGear(10)}
 end

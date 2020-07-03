@@ -7,9 +7,10 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Low fuel and cheap registration - low cost bonus"
-    salience 9
+    agenda-group "recommendation"
+    salience 194
     when
-        $c: Car(getScore() == 30)
+        $c: Car(getScore().getLowCost() == 0, getScore().getFuel() > 0, getScore().getRegistration() > 0)
     then
-        $c.setScore(10);
+        modify($c){getScore().setLowCost(10)}
 end

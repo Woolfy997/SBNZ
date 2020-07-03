@@ -3,19 +3,24 @@ dialect  "mvel"
 
 import ftn.siit.sbnz.SBNZ.model.Query
 import ftn.siit.sbnz.SBNZ.model.Car
+import ftn.siit.sbnz.SBNZ.model.Score
 
 global Query q
 
 rule "Car within age range"
+    agenda-group "recommendation"
+    salience 100
     when
-        $c: Car(2020 - getYear() <= q.getAge())
+        $c: Car(getScore().getAge() == 0, 2020 - getYear() <= q.getAge())
     then
-        $c.setScore(40);
+        modify($c){getScore().setAge(40)}
 end
 
 rule "Car close to age range"
+    agenda-group "recommendation"
+    salience 99
     when
-        $c: Car(q.getAge() < 2020 - getYear(), 2020 - getYear() <= q.getAge()+2)
+        $c: Car(getScore().getAge() == 0, q.getAge() < 2020 - getYear(), 2020 - getYear() <= q.getAge()+2)
     then
-        $c.setScore(20);
+        modify($c){getScore().setAge(20)}
 end

@@ -6,26 +6,11 @@ import ftn.siit.sbnz.SBNZ.model.Car
 
 global Query q
 
-rule "low cost and eco friendly - bonus electric"
-    salience 7
+rule "low cost and eco friendly - bonus"
+    agenda-group "recommendation"
+    salience 190
     when
-        $c: Car(getScore() == 60)
+        $c: Car(getScore().getCheapAndEco() == 0, getScore().getLowCost() > 0, getScore().getEnvironment() > 0)
     then
-        $c.setScore(10);
-end
-
-rule "low cost and eco friendly - bonus hybrid"
-    salience 7
-    when
-        $c: Car(getScore() == 55)
-    then
-        $c.setScore(10);
-end
-
-rule "low cost and eco friendly - bonus lpg"
-    salience 7
-    when
-        $c: Car(getScore() == 50)
-    then
-        $c.setScore(10);
+        modify($c){getScore().setCheapAndEco(10)}
 end

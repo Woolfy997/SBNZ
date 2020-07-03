@@ -8,8 +8,10 @@ import ftn.siit.sbnz.SBNZ.model.Car.Type
 global Query q
 
 rule "Smaller car for inexperienced drivers"
+    agenda-group "recommendation"
+    salience 94
     when
-        $c: Car((getType() == Type.CONVERTIBLE || getType() == Type.COUPE || getType() == Type.HATCHBACK), q.getExperience() < 4)
+        $c: Car(getScore().getExperience() == 0, (getType() == Type.CONVERTIBLE || getType() == Type.COUPE || getType() == Type.HATCHBACK), q.getExperience() < 4)
     then
-        $c.setScore(25);
+        modify($c){getScore().setExperience(25)}
 end

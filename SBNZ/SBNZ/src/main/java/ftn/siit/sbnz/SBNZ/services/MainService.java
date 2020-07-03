@@ -25,10 +25,11 @@ public class MainService {
 
     public ArrayList<Car> bestMatches(Query query) {
         KieSession kieSession =  kieContainer.newKieSession("kars");
+        kieSession.getAgenda().getAgendaGroup("recommendation").setFocus();
         ArrayList<Car> cars = fillBase();
         kieSession.setGlobal("q", query);
-        kieSession.setGlobal("filter", new Filter());
-        kieSession.setGlobal("filtered", new ArrayList<Car>());
+        //kieSession.setGlobal("filter", new Filter());
+        //kieSession.setGlobal("filtered", new ArrayList<Car>());
         for (Car car: cars) {
             kieSession.insert(car);
         }

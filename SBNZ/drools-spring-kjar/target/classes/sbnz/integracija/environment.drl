@@ -8,25 +8,28 @@ import ftn.siit.sbnz.SBNZ.model.Car.Fuel
 global Query q
 
 rule "Environment friendly car prefered - electric"
-    salience 8
+    agenda-group "recommendation"
+    salience 193
     when
-        $c: Car(getFuel() == Fuel.ELECTRIC, q.getEnvironment() == true)
+        $c: Car(getScore().getEnvironment() == 0, getFuel() == Fuel.ELECTRIC, q.getEnvironment() == true)
     then
-        $c.setScore(20);
+        modify($c){getScore().setEnvironment(20)}
 end
 
 rule "Environment friendly car prefered - hybrid"
-    salience 8
+    agenda-group "recommendation"
+    salience 192
     when
-        $c: Car(getFuel() == Fuel.HYBRID, q.getEnvironment() == true)
+        $c: Car(getScore().getEnvironment() == 0, getFuel() == Fuel.HYBRID, q.getEnvironment() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setEnvironment(15)}
 end
 
 rule "Environment friendly car prefered - lpg"
-    salience 8
+    agenda-group "recommendation"
+    salience 191
     when
-        $c: Car(getFuel() == Fuel.LPG, q.getEnvironment() == true)
+        $c: Car(getScore().getEnvironment() == 0, getFuel() == Fuel.LPG, q.getEnvironment() == true)
     then
-        $c.setScore(10);
+        modify($c){getScore().setEnvironment(10)}
 end

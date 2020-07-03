@@ -7,8 +7,10 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Prefered car make"
+    agenda-group "recommendation"
+    salience 88
     when
-        $c: Car(getMake() == q.getMake())
+        $c: Car(getScore().getMake() == 0, getMake() == q.getMake())
     then
-        $c.setScore(15);
+        modify($c){getScore().setMake(15)}
 end

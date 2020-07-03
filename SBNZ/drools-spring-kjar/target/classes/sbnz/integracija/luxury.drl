@@ -7,8 +7,10 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Luxury cars prefered"
+    agenda-group "recommendation"
+    salience 89
     when
-        $c: Car(getLuxury() == true, q.getLuxury() == true)
+        $c: Car(getScore().getLuxury() == 0, getLuxury() == true, q.getLuxury() == true)
     then
-        $c.setScore(25);
+        modify($c){getScore().setLuxury(25)}
 end

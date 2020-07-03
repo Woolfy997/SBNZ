@@ -7,29 +7,37 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Excellent rating bonus"
+    agenda-group "recommendation"
+    salience 81
     when
-        $c: Car(getRating() >= 9)
+        $c: Car(getScore().getRating() == 0, getRating() >= 9)
     then
-        $c.setScore(20);
+        modify($c){getScore().setRating(20)}
 end
 
 rule "Very good rating bonus"
+    agenda-group "recommendation"
+    salience 80
     when
-        $c: Car(getRating() >= 8, getRating() < 9)
+        $c: Car(getScore().getRating() == 0, getRating() >= 8, getRating() < 9)
     then
-        $c.setScore(15);
+        modify($c){getScore().setRating(15)}
 end
 
 rule "Good rating bonus"
+    agenda-group "recommendation"
+    salience 79
     when
-        $c: Car(getRating() >= 7, getRating() < 8)
+        $c: Car(getScore().getRating() == 0, getRating() >= 7, getRating() < 8)
     then
-        $c.setScore(10);
+        modify($c){getScore().setRating(10)}
 end
 
 rule "Average rating bonus"
+    agenda-group "recommendation"
+    salience 78
     when
-        $c: Car(getRating() >= 6, getRating() < 7)
+        $c: Car(getScore().getRating() == 0, getRating() >= 6, getRating() < 7)
     then
-        $c.setScore(5);
+        modify($c){getScore().setRating(5)}
 end

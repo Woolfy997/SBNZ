@@ -7,17 +7,19 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Registration not expensive - car price under 10000"
-    salience 10
+    agenda-group "recommendation"
+    salience 200
     when
-        $c: Car(getPrice() < 10000, getRegPrice() < getPrice()*0.05, q.getRegNotExpensive() == true)
+        $c: Car(getScore().getRegistration() == 0, getPrice() < 10000, getRegPrice() < getPrice()*0.05, q.getRegNotExpensive() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setRegistration(15)}
 end
 
 rule "Registration not expensive - car price over 10000"
-    salience 10
+    agenda-group "recommendation"
+    salience 199
     when
-        $c: Car(getPrice() >= 10000, getRegPrice() < getPrice()*0.1, q.getRegNotExpensive() == true)
+        $c: Car(getScore().getRegistration() == 0, getPrice() >= 10000, getRegPrice() < getPrice()*0.1, q.getRegNotExpensive() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setRegistration(15)}
 end

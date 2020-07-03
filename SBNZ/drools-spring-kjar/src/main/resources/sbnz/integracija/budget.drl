@@ -7,22 +7,28 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Car within budget"
+    agenda-group "recommendation"
+    salience 98
     when
-        $c: Car(getPrice() <= q.getBudget())
+        $c: Car(getScore().getBudget() == 0, getPrice() <= q.getBudget())
     then
-        $c.setScore(70);
+        modify($c){getScore().setBudget(70)}
 end
 
 rule "Car very close to budget"
+    agenda-group "recommendation"
+    salience 97
     when
-        $c: Car(getPrice() > q.getBudget(), getPrice() <= q.getBudget()*1.05)
+        $c: Car(getScore().getBudget() == 0, getPrice() > q.getBudget(), getPrice() <= q.getBudget()*1.05)
     then
-        $c.setScore(40);
+        modify($c){getScore().setBudget(40)}
 end
 
 rule "Car close to budget"
+    agenda-group "recommendation"
+    salience 96
     when
-        $c: Car(getPrice() > q.getBudget()*1.05, getPrice() <= q.getBudget()*1.1)
+        $c: Car(getScore().getBudget() == 0, getPrice() > q.getBudget()*1.05, getPrice() <= q.getBudget()*1.1)
     then
-        $c.setScore(20);
+        modify($c){getScore().setBudget(20)}
 end

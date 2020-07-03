@@ -7,22 +7,28 @@ import ftn.siit.sbnz.SBNZ.model.Car
 global Query q
 
 rule "Low mileage current year"
+    agenda-group "recommendation"
+    salience 87
     when
-        $c: Car(getYear() == 2020, getKm() < 10000, q.getLowKm() == true)
+        $c: Car(getScore().getMileage() == 0, getYear() == 2020, getKm() < 10000, q.getLowKm() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setMileage(15)}
 end
 
 rule "Low mileage"
+    agenda-group "recommendation"
+    salience 86
     when
-        $c: Car(getYear() != 2020, getKm() < 200000, getKm() / (2020 - getYear()) < 10000, q.getLowKm() == true)
+        $c: Car(getScore().getMileage() == 0, getYear() != 2020, getKm() < 200000, getKm() / (2020 - getYear()) < 10000, q.getLowKm() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setMileage(15)}
 end
 
 rule "Very high mileage"
+    agenda-group "recommendation"
+    salience 85
     when
-        $c: Car(getKm() > 500000, q.getLowKm() == true)
+        $c: Car(getScore().getMileage() == 0, getKm() > 500000, q.getLowKm() == true)
     then
-        $c.setScore(-15);
+        modify($c){getScore().setMileage(15)}
 end

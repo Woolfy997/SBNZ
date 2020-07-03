@@ -8,10 +8,6 @@ public class Query {
         EVERYDAY, SPORT, OFFROAD, TRANSPORT
     }
 
-    public enum Gear {
-        MANUAL, AUTOMATIC, NA
-    }
-
     private Integer budget;
     private Integer familySize;
     private Integer experience;
@@ -23,7 +19,7 @@ public class Query {
     private Boolean luxury;
     private Car.Country country;
     private String make;
-    private Gear gear;
+    private Car.Gear gear;
     private Boolean environment;
 
     public Query() {
@@ -31,7 +27,7 @@ public class Query {
 
     public Query(Integer budget, Integer familySize, Integer experience, Purpose purpose, Boolean regNotExpensive,
                  Boolean lowFuelConsumption, Integer age, Boolean luxury, Car.Country country, String make,
-                 Gear gear, Boolean environment, Boolean lowKm) {
+                 Car.Gear gear, Boolean environment, Boolean lowKm) {
         this.budget = budget;
         this.familySize = familySize;
         this.experience = experience;
@@ -70,7 +66,7 @@ public class Query {
         this.luxury = queryDTO.getLuxury();
         this.country = Car.Country.valueOf(queryDTO.getCountry());
         this.make = queryDTO.getMake();
-        this.gear = Gear.valueOf(queryDTO.getGear());
+        this.gear = Car.Gear.valueOf(queryDTO.getGear());
         this.environment = queryDTO.getEnvironment();
         this.lowKm = queryDTO.getLowKm();
     }
@@ -139,11 +135,11 @@ public class Query {
         this.make = make;
     }
 
-    public Gear getGear() {
+    public Car.Gear getGear() {
         return gear;
     }
 
-    public void setGear(Gear gear) {
+    public void setGear(Car.Gear gear) {
         this.gear = gear;
     }
 

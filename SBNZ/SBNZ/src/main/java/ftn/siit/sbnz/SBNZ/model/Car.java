@@ -19,7 +19,7 @@ public class Car {
     }
 
     public enum Gear {
-        MANUAL, AUTOMATIC
+        MANUAL, AUTOMATIC, NA
     }
     @Position(0)
     private Integer id;
@@ -44,10 +44,9 @@ public class Car {
     private Integer regPrice;
     @Position(3)
     private Gear gear;
-    private Integer score;
+    private Score score = new Score();
 
     public Car() {
-        this.score = 0;
     }
 
     public Car(Integer id, String make, String model, Country country, Fuel fuel, Integer year, Double price,
@@ -72,7 +71,6 @@ public class Car {
         this.fuelConsumption = fuelConsumption;
         this.regPrice = regPrice;
         this.gear = gear;
-        this.score = 0;
     }
 
     public Integer getId() {
@@ -227,12 +225,12 @@ public class Car {
         this.gear = gear;
     }
 
-    public Integer getScore() {
+    public Score getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
-        this.score += score;
+    public void setScore(Score score) {
+        this.score = score;
     }
 
     @Override

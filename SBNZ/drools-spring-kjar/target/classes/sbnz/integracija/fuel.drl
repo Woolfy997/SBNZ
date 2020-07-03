@@ -8,33 +8,37 @@ import ftn.siit.sbnz.SBNZ.model.Car.Fuel
 global Query q
 
 rule "Low fuel consumption - diesel"
-    salience 10
+    agenda-group "recommendation"
+    salience 198
     when
-        $c: Car(getFuelConsumption() <= 8, getFuel() == Fuel.DIESEL, q.getLowFuelConsumption() == true)
+        $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 8, getFuel() == Fuel.DIESEL, q.getLowFuelConsumption() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setFuel(15)}
 end
 
 rule "Low fuel consumption - gas"
-    salience 10
+    agenda-group "recommendation"
+    salience 197
     when
-        $c: Car(getFuelConsumption() <= 10, getFuel() == Fuel.GAS, q.getLowFuelConsumption() == true)
+        $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 10, getFuel() == Fuel.GAS, q.getLowFuelConsumption() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setFuel(15)}
 end
 
 rule "Low fuel consumption - lpg"
-    salience 10
+    agenda-group "recommendation"
+    salience 196
     when
-        $c: Car(getFuelConsumption() <= 13, getFuel() == Fuel.LPG, q.getLowFuelConsumption() == true)
+        $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 13, getFuel() == Fuel.LPG, q.getLowFuelConsumption() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setFuel(15)}
 end
 
 rule "Low fuel consumption - hybrid"
-    salience 10
+    agenda-group "recommendation"
+    salience 195
     when
-        $c: Car(getFuelConsumption() <= 3, getFuel() == Fuel.HYBRID, q.getLowFuelConsumption() == true)
+        $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 3, getFuel() == Fuel.HYBRID, q.getLowFuelConsumption() == true)
     then
-        $c.setScore(15);
+        modify($c){getScore().setFuel(15)}
 end

@@ -9,22 +9,28 @@ import ftn.siit.sbnz.SBNZ.model.Car.Type
 global Query q
 
 rule "Sport cars"
+    agenda-group "recommendation"
+    salience 84
     when
-        $c: Car((getType() == Type.COUPE || getType() == Type.CONVERTIBLE), q.getPurpose() == Purpose.SPORT)
+        $c: Car(getScore().getPurpose() == 0, (getType() == Type.COUPE || getType() == Type.CONVERTIBLE), q.getPurpose() == Purpose.SPORT)
     then
-        $c.setScore(15);
+        modify($c){getScore().setPurpose(15)}
 end
 
 rule "Off-road cars"
+    agenda-group "recommendation"
+    salience 83
     when
-        $c: Car((getType() == Type.SUV || getType() == Type.PICKUP), q.getPurpose() == Purpose.OFFROAD)
+        $c: Car(getScore().getPurpose() == 0, (getType() == Type.SUV || getType() == Type.PICKUP), q.getPurpose() == Purpose.OFFROAD)
     then
-        $c.setScore(15);
+        modify($c){getScore().setPurpose(15)}
 end
 
 rule "Transport cars"
+    agenda-group "recommendation"
+    salience 82
     when
-        $c: Car((getType() == Type.PICKUP || getType() == Type.STATIONWAGON || getType() == Type.SUV), q.getPurpose() == Purpose.TRANSPORT)
+        $c: Car(getScore().getPurpose() == 0, (getType() == Type.PICKUP || getType() == Type.STATIONWAGON || getType() == Type.SUV), q.getPurpose() == Purpose.TRANSPORT)
     then
-        $c.setScore(15);
+        modify($c){getScore().setPurpose(15)}
 end
