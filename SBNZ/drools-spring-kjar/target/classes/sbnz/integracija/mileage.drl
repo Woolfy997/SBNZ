@@ -12,7 +12,7 @@ rule "Low mileage current year"
     when
         $c: Car(getScore().getMileage() == 0, getYear() == 2020, getKm() < 10000, q.getLowKm() == true)
     then
-        modify($c){getScore().setMileage(15)}
+        modify($c){getScore().setMileage(20)}
 end
 
 rule "Low mileage"
@@ -21,7 +21,7 @@ rule "Low mileage"
     when
         $c: Car(getScore().getMileage() == 0, getYear() != 2020, getKm() < 200000, getKm() / (2020 - getYear()) < 10000, q.getLowKm() == true)
     then
-        modify($c){getScore().setMileage(15)}
+        modify($c){getScore().setMileage(20)}
 end
 
 rule "Very high mileage"
@@ -30,5 +30,5 @@ rule "Very high mileage"
     when
         $c: Car(getScore().getMileage() == 0, getKm() > 500000, q.getLowKm() == true)
     then
-        modify($c){getScore().setMileage(15)}
+        modify($c){getScore().setMileage(-20)}
 end

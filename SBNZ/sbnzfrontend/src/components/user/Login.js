@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { TextField, Button, Paper, Container } from "@material-ui/core";
 import Axios from "axios";
 import FormTitle from "../layout/FormTitle";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const submitForm = () => {
     const payload = {
       email: email,
       password: password,
     };
-    Axios.post("http://localhost:8080/login", payload).then((response) =>
-      localStorage.setItem("access_token", response.data)
+    Axios.post("http://localhost:8080/login", payload).then((response) => {
+      localStorage.setItem("access_token", response.data);
+      history.push("/addrule");
+    }
     );
   };
   return (
@@ -28,6 +32,7 @@ const Login = () => {
           />
           <TextField
             label="Password"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />

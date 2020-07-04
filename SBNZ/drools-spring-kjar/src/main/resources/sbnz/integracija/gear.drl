@@ -13,5 +13,5 @@ rule "Prefered gearbox"
     when
         $c: Car(getScore().getGear() == 0, getGear() == q.getGear())
     then
-        modify($c){getScore().setGear(10)}
+        modify($c){getScore().setGear(20)}
 end

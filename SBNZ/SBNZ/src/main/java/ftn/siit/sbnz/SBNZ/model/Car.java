@@ -2,8 +2,11 @@ package ftn.siit.sbnz.SBNZ.model;
 
 import org.kie.api.definition.type.Position;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table
 public class Car {
 
     public enum Country {
@@ -21,29 +24,51 @@ public class Car {
     public enum Gear {
         MANUAL, AUTOMATIC, NA
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     @Position(0)
     private Integer id;
+    @Column(nullable = false)
     private String make;
+    @Column(nullable = false)
     private String model;
+    @Column(nullable = false)
     private Country country;
+    @Column(nullable = false)
     @Position(1)
     private Fuel fuel;
+    @Column(nullable = false)
     private Integer year;
+    @Column(nullable = false)
     private Double price;
+    @Column(nullable = false)
     @Position(2)
     private Type type;
+    @Column(nullable = false)
     private Boolean luxury;
+    @Column(nullable = false)
     private Integer doors;
+    @Column(nullable = false)
     private Integer seats;
+    @Column(nullable = false)
     private Integer cc;
+    @Column(nullable = false)
     private Integer kw;
+    @Column(nullable = false)
     private Integer km;
+    @Column(nullable = false)
     private String engine;
+    @Column(nullable = false)
     private Double rating;
+    @Column(nullable = false)
     private Double fuelConsumption;
+    @Column(nullable = false)
     private Integer regPrice;
+    @Column(nullable = false)
     @Position(3)
     private Gear gear;
+    @OneToOne(cascade={CascadeType.ALL})
     private Score score = new Score();
 
     public Car() {

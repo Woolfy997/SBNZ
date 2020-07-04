@@ -49,10 +49,17 @@ public class QueryController {
         return new ResponseEntity<>(filtered, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addrule")
     public ResponseEntity<String> addRule(@RequestBody RuleDTO ruleDTO) {
         mainService.addRule(ruleDTO);
         return new ResponseEntity<>("Rule added", HttpStatus.OK);
     }
+
+    @PostMapping("/addcar")
+    public ResponseEntity<String> addCar(@RequestBody Car car) {
+        mainService.addCar(car);
+        return new ResponseEntity<>("Car added", HttpStatus.OK);
+    }
+
 }

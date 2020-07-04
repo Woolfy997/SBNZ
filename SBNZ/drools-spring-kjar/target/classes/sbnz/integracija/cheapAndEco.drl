@@ -12,5 +12,5 @@ rule "low cost and eco friendly - bonus"
     when
         $c: Car(getScore().getCheapAndEco() == 0, getScore().getLowCost() > 0, getScore().getEnvironment() > 0)
     then
-        modify($c){getScore().setCheapAndEco(10)}
+        modify($c){getScore().setCheapAndEco(20)}
 end

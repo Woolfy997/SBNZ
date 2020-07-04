@@ -13,7 +13,7 @@ rule "Low fuel consumption - diesel"
     when
         $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 8, getFuel() == Fuel.DIESEL, q.getLowFuelConsumption() == true)
     then
-        modify($c){getScore().setFuel(15)}
+        modify($c){getScore().setFuel(20)}
 end
 
 rule "Low fuel consumption - gas"
@@ -22,7 +22,7 @@ rule "Low fuel consumption - gas"
     when
         $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 10, getFuel() == Fuel.GAS, q.getLowFuelConsumption() == true)
     then
-        modify($c){getScore().setFuel(15)}
+        modify($c){getScore().setFuel(20)}
 end
 
 rule "Low fuel consumption - lpg"
@@ -31,7 +31,7 @@ rule "Low fuel consumption - lpg"
     when
         $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 13, getFuel() == Fuel.LPG, q.getLowFuelConsumption() == true)
     then
-        modify($c){getScore().setFuel(15)}
+        modify($c){getScore().setFuel(20)}
 end
 
 rule "Low fuel consumption - hybrid"
@@ -40,5 +40,5 @@ rule "Low fuel consumption - hybrid"
     when
         $c: Car(getScore().getFuel() == 0, getFuelConsumption() <= 3, getFuel() == Fuel.HYBRID, q.getLowFuelConsumption() == true)
     then
-        modify($c){getScore().setFuel(15)}
+        modify($c){getScore().setFuel(20)}
 end

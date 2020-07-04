@@ -20,7 +20,7 @@ class SbnzApplicationTests {
 	@Test
 	void testQuery() {
 		Query query = new Query();
-		query.setBudget(100000);
+		query.setBudget(50000);
 		query.setFamilySize(4);
 		query.setExperience(5);
 		query.setPurpose(Query.Purpose.EVERYDAY);
@@ -29,7 +29,7 @@ class SbnzApplicationTests {
 		query.setAge(10);
 		query.setLuxury(true);
 		query.setCountry(Car.Country.UK);
-		query.setMake("LAND ROVER");
+		query.setMake("Land Rover");
 		query.setGear(Car.Gear.AUTOMATIC);
 		query.setEnvironment(false);
 		query.setLowKm(true);
@@ -37,22 +37,22 @@ class SbnzApplicationTests {
 		ArrayList<Car> result = mainService.bestMatches(query);
 		assertEquals(result.get(0).getMake(), "Land Rover");
 		assertEquals(result.get(0).getModel(), "Range Rover");
-		assertEquals(result.get(1).getMake(), "Audi");
-		assertEquals(result.get(1).getModel(), "A8");
-		assertEquals(result.get(2).getMake(), "Toyota");
-		assertEquals(result.get(2).getModel(), "Hilux");
+		assertEquals(result.get(1).getMake(), "Peugeot");
+		assertEquals(result.get(1).getModel(), "508");
+		assertEquals(result.get(2).getMake(), "Jaguar");
+		assertEquals(result.get(2).getModel(), "XF");
 	}
 
 	@Test
 	void testFilter() {
 		Filter filter = new Filter();
-		filter.setFuel(Car.Fuel.DIESEL);
-		filter.setType(Car.Type.STATIONWAGON);
+		filter.setFuel(Car.Fuel.GAS);
+		filter.setType(Car.Type.SEDAN);
 		filter.setGear(Car.Gear.MANUAL);
 
 		ArrayList<Car> result = mainService.filter(filter);
-		assertEquals(result.get(0).getMake(), "Volkswagen");
-		assertEquals(result.get(0).getModel(), "Passat B5");
+		assertEquals(result.get(0).getMake(), "Honda");
+		assertEquals(result.get(0).getModel(), "Civic");
 
 	}
 

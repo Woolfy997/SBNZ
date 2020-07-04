@@ -13,7 +13,7 @@ rule "Car within age range"
     when
         $c: Car(getScore().getAge() == 0, 2020 - getYear() <= q.getAge())
     then
-        modify($c){getScore().setAge(40)}
+        modify($c){getScore().setAge(50)}
 end
 
 rule "Car close to age range"

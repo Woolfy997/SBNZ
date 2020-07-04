@@ -1,24 +1,61 @@
 package ftn.siit.sbnz.SBNZ.model;
 
+import org.kie.api.definition.type.Position;
+
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Score {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
+    @Position(0)
+    private Integer id;
+    @Column(nullable = false)
     private Integer age = 0;
+    @Column(nullable = false)
     private Integer budget = 0;
+    @Column(nullable = false)
     private Integer country = 0;
+    @Column(nullable = false)
     private Integer environment = 0;
+    @Column(nullable = false)
     private Integer experience = 0;
+    @Column(nullable = false)
     private Integer familySeats = 0;
+    @Column(nullable = false)
     private Integer familyDoors = 0;
+    @Column(nullable = false)
     private Integer fuel = 0;
+    @Column(nullable = false)
     private Integer gear = 0;
+    @Column(nullable = false)
     private Integer luxury = 0;
+    @Column(nullable = false)
     private Integer make = 0;
+    @Column(nullable = false)
     private Integer mileage = 0;
+    @Column(nullable = false)
     private Integer purpose = 0;
+    @Column(nullable = false)
     private Integer rating = 0;
+    @Column(nullable = false)
     private Integer registration = 0;
+    @Column(nullable = false)
     private Integer lowCost = 0;
+    @Column(nullable = false)
     private Integer cheapAndEco = 0;
+    @Column(nullable = false)
     private Integer sum = 0;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getAge() {
         return age;

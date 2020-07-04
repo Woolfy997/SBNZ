@@ -25,7 +25,8 @@ const Query = (props) => {
   const [luxury, setLuxury] = React.useState(false);
   const [country, setCountry] = React.useState("NA");
   const [countryOptions] = React.useState(["GERMANY", "ITALY", "FRANCE", "JAPAN", "USA", "RUSSIA", "ROMANIA", "CZECHIA", "SPAIN", "UK", "SOUTH_KOREA", "CHINA", "NA"]);
-  const [make, setMake] = React.useState("");
+  const [make, setMake] = React.useState("NA");
+  const [makeOptions] = React.useState(["NA", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Citroen", "Dacia", "Fiat", "Ford", "Great Wall", "Honda", "Hyundai", "Jaguar", "Kia", "Lada", "Lamborghini", "Land Rover", "Mercedes", "Mini", "Mitsubishi", "Nissan", "Opel", "Peugeot", "Renault", "Seat", "Skoda", "Tesla", "Toyota", "Volkswagen"]);
   const [gear, setGear] = React.useState("NA");
   const [gearOptions] = React.useState(["MANUAL", "AUTOMATIC", "NA"]);
   const [environment, setEnvironment] = React.useState(false);
@@ -52,6 +53,9 @@ const Query = (props) => {
   const handleSelectChangeCountry = (event) => {
     setCountry(event.target.value);
   };
+  const handleSelectChangeMake = (event) => {
+    setMake(event.target.value);
+  };
   const handleSelectChangeGear = (event) => {
     setGear(event.target.value);
   };
@@ -71,13 +75,17 @@ const Query = (props) => {
       gear: gear,
       environment: environment,
     };
-    console.log(query);
     Axios.post(
       "http://localhost:8080/query",
       query
     ).then((response) => setCars(response.data));
   };
   const purposeOptionsList = purposeOptions.map((opt) => (
+    <MenuItem key={opt} value={opt}>
+      {opt}
+    </MenuItem>
+  ));
+  const makeOptionsList = makeOptions.map((opt) => (
     <MenuItem key={opt} value={opt}>
       {opt}
     </MenuItem>
@@ -118,6 +126,12 @@ const Query = (props) => {
             value={experience}
             onChange={(event) => setExperience(event.target.value)}
           />
+          <TextField
+            type="number"
+            label="Maximum car age"
+            value={age}
+            onChange={(event) => setAge(event.target.value)}
+          />     
           <label>Purpose</label>
           <Select
             id="purpose"
@@ -125,21 +139,7 @@ const Query = (props) => {
             onChange={handleSelectChangePurpose}
           >
             {purposeOptionsList}
-          </Select>
-          <label>Registration not expensive</label>
-          <Checkbox checked={regNotExpensive} onChange={handleCheckRegNotExpensive} />
-          <label>Low fuel consumption</label>
-          <Checkbox checked={lowFuelConsumption} onChange={handleCheckLowFuelConsumption} />
-          <label>Low mileage</label>
-          <Checkbox checked={lowKm} onChange={handleCheckLowKm} />
-          <TextField
-            type="number"
-            label="Maximum car age"
-            value={age}
-            onChange={(event) => setAge(event.target.value)}
-          />          
-          <label>Luxury cars prefered</label>
-          <Checkbox checked={luxury} onChange={handleCheckLuxury} />
+          </Select>     
           <label>Prefered country of origin</label>
           <Select
             id="country"
@@ -148,11 +148,14 @@ const Query = (props) => {
           >
             {countryOptionsList}
           </Select>
-          <TextField
-            label="Prefered make"
+          <label>Prefered make</label>
+          <Select
+            id="make"
             value={make}
-            onChange={(event) => setMake(event.target.value)}
-          />
+            onChange={handleSelectChangeMake}
+          >
+            {makeOptionsList}
+          </Select>
           <label>Prefered gear type</label>
           <Select
             id="gear"
@@ -161,8 +164,16 @@ const Query = (props) => {
           >
             {gearOptionsList}
           </Select>
+          <label>Registration not expensive</label>
+          <Checkbox checked={regNotExpensive} onChange={handleCheckRegNotExpensive} />
+          <label>Low fuel consumption</label>
+          <Checkbox checked={lowFuelConsumption} onChange={handleCheckLowFuelConsumption} />
+          <label>Low mileage</label>
+          <Checkbox checked={lowKm} onChange={handleCheckLowKm} />
           <label>Environment-friendly</label>
           <Checkbox checked={environment} onChange={handleCheckEnvironment} />
+          <label>Luxury cars prefered</label>
+          <Checkbox checked={luxury} onChange={handleCheckLuxury} />
 
           <Button variant="contained" color="primary" onClick={submitForm}>
             Send

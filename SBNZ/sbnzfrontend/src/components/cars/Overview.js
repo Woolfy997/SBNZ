@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Axios from "axios";
 import ViewOne from "../cars/ViewOne";
 import {
@@ -11,7 +11,7 @@ import {
 
 const Overview = (props) => {
     const [cars, setCars] = React.useState([]);
-    const [fuel, setFuel] = React.useState("ELECTRIC");
+    const [fuel, setFuel] = React.useState("DIESEL");
     const [fuelOptions] = React.useState(["ELECTRIC", "HYBRID", "DIESEL", "GAS", "LPG"]);
     const [type, setType] = React.useState("HATCHBACK");
     const [typeOptions] = React.useState(["HATCHBACK", "SEDAN", "STATIONWAGON", "COUPE", "CONVERTIBLE", "SUV", "PICKUP", "MINIVAN"]);
@@ -44,22 +44,16 @@ const Overview = (props) => {
           {opt}
         </MenuItem>
     ));
-    useEffect(() => {
-        Axios.get("http://localhost:8080/getAll").then((response) => {
-            console.log(response.data); setCars(response.data);
-        });
-      }, [props]);
     const submitForm = () => {
         let filter = {
           fuel: fuel,
           type: type,
           gear: gear
         };
-        console.log(filter);
         Axios.post(
           "http://localhost:8080/filter",
           filter
-        ).then((response) => {console.log(response.data); setCars(response.data)});
+        ).then((response) => {setCars(response.data)});
     };
   return (
     <Container className="form-container">

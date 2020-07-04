@@ -12,5 +12,5 @@ rule "Low fuel and cheap registration - low cost bonus"
     when
         $c: Car(getScore().getLowCost() == 0, getScore().getFuel() > 0, getScore().getRegistration() > 0)
     then
-        modify($c){getScore().setLowCost(10)}
+        modify($c){getScore().setLowCost(15)}
 end

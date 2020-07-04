@@ -12,7 +12,7 @@ rule "Car within budget"
     when
         $c: Car(getScore().getBudget() == 0, getPrice() <= q.getBudget())
     then
-        modify($c){getScore().setBudget(70)}
+        modify($c){getScore().setBudget(80)}
 end
 
 rule "Car very close to budget"
